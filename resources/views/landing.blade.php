@@ -28,17 +28,17 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="/"><img src="https://vatspa.es/img/VATSPA_LOGO.png"  width="10%"></a>
+      <a class="navbar-brand" href="{{ route('home') }}"><img src="https://vatspa.es/img/VATSPA_LOGO.png"  width="10%"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger {{ Request::is('bookings*') ? 'active' : '' }}" href="{{ route('bookking.index') }}">Bookings</a>
+            <a class="nav-link {{ Request::is('bookings*') ? 'active' : '' }}" href="{{ route('bookking.index') }}">Bookings</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Request::is('admin*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,11 +54,11 @@
           @admin
           @endadmin
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{{ route('logout') }}">Logout</a>
+            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
           </li>
           @else
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{{ route('login') }}">Login</a>
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
           @endif
         </ul>
@@ -73,7 +73,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; VATSPA {{ date('Y') }}</p>
+      <p class="m-0 text-center text-white">Copyright &copy; <a style="color: white; text-decoration: none;" href="https://vatspa.es" target="_blank">VATSPA</a> {{ date('Y') }}</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -84,9 +84,6 @@
 
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom JavaScript for this theme -->
-  <script src="js/scrolling-nav.js"></script>
 
   @yield('scripts')
 
