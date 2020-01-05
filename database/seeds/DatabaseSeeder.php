@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'event_name' => 'Madrid Realops',
             'event_text' => 'Basic text',
             'below_title_text' => 'We proudly invite you to Madrid Realops',
+            'event_date' => Carbon::now()->format('d.m.Y'),
         ]);
     }
 }

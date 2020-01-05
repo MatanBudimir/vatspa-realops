@@ -23,6 +23,7 @@ class CreateEventInfoTable extends Migration
             $table->longtext('background_image');
             $table->longtext('banner_link');
             $table->longtext('event_name');
+            $table->string('event_date');
             $table->longtext('event_text');
             $table->string('title_text')->default('Madrid Realops');
             $table->longtext('below_title_text');

@@ -11,9 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front.index');
+Route::get('/', 'PagesController@home')->name('home');
+
+Route::group(['prefix' => 'bookings'], function () {
+
+    Route::get('/', 'BookingController@index')->name('bookking.index');
+
 });
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('users', 'AdminController@users')->name('admin.users');
+
+    Route::get('bookings', 'AdminController@bookings')->name('admin.bookings');
+
+    Route::get('event', 'AdminController@eventInfo')->name('admin.event');
+
+});
+
 
 //VATSIM SSO Routing
 Route::get('/login', 'LoginController@login')->middleware('guest')->name('login');

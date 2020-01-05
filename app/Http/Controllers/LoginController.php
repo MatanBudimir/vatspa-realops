@@ -47,10 +47,10 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Vatsim\OAuth\SSOException
      */
-    public $newUser;
+    public $user;
     public function validateLogin(Request $get)
     {
-        $this->sso->validate(session('key'), session('secret'), $get->input('oauth_verifier'), function ($user, $request) {
+        $this->sso->validate(session('key'), session('secret'), $get->oauth_verifier, function ($user, $request) {
             session()->forget('key');
             session()->forget('secret');
             User::updateOrCreate(['id' => $user->id], [
@@ -61,7 +61,7 @@ class LoginController extends Controller
             $user = User::find($user->id);
             Auth::login($user, true);
         });
-        return redirect('/dashboard')->with('success', 'Logged in!');
+        return redirect('/')->with('success', 'Logged in!');
     }
     /**
      * Check if the user was on the old roster, if so, certify them!
