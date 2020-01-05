@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::post('edit', 'AdminController@editUser')->name('admin.user.edit');
 
+    Route::post('event/edit', 'AdminController@editEvent')->name('admin.edit.event');
+
 });
 
 

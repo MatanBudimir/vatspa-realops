@@ -38,4 +38,37 @@ class AdminController extends Controller
 
         return redirect()->back()->withSuccess('User successfully edited!');
     }
+
+    protected function editEvent(Request $request) {
+        $request->validate([
+            'booking_end' => 'required',
+            'icao' => 'required|min:4|max:4',
+            'chart' => 'required',
+            'back_img' => 'required',
+            'banner' => 'required',
+            'ev_name' => 'required',
+            'ev_date' => 'required',
+            'title' => 'required',
+            'b_title' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+        ]);
+        EventInfo::first()->update([
+            'bookings_end' => $request->booking_end,
+            'icao' => $request->icao,
+            'allowed_bookings' => $request->allowed,
+            'chart_link' => $request->chart,
+            'background_image' => $request->back_img,
+            'banner_link' => $request->banner,
+            'event_name' => $request->ev_name,
+            'event_date' => $request->ev_date,
+            'title_text' => $request->title,
+            'below_title_text' => $request->b_title,
+            'start_time' => $request->start,
+            'end_time' => $request->end,
+            'event_text' => $request->ev_text,
+        ]);
+
+        return redirect()->back()->withSuccess('Event Edited!');
+    }
 }

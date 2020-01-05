@@ -15,7 +15,6 @@ class CreateEventInfoTable extends Migration
     {
         Schema::create('event_info', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('bookings')->default(false);
             $table->timestamp('bookings_end');
             $table->string('icao')->default('LEMD');
             $table->tinyInteger('allowed_bookings')->default(1);

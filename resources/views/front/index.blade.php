@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>{{ $event->event_name }} - {{ $event->event_date }}</h2>
-          <p class="lead">{{ $event->event_text }}</p>
+          <p class="lead">{!! html_entity_decode($event->event_text) !!}</p>
         </div>
       </div>
     </div>

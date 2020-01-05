@@ -9,7 +9,7 @@ class Booking extends Model
     protected $table = 'bookings';
 
     protected $fillable = [
-        'user_id', 'unique_id', 'callsign', 'aircraft', 'etd', 'eta', 'date', 'route', 'booked',
+        'user_id', 'unique_id', 'callsign', 'aircraft', 'etd', 'eta', 'date', 'route', 'booked', 'dep_icao', 'arr_icao',
     ];
 
     public function pilot() {
