@@ -13,13 +13,13 @@
 
 Route::get('/', 'PagesController@home')->name('home');
 
-Route::group(['prefix' => 'bookings'], function () {
+Route::group(['prefix' => 'bookings', 'middleware' => 'auth'], function () {
 
     Route::get('/', 'BookingController@index')->name('bookking.index');
 
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::get('users', 'AdminController@users')->name('admin.users');
 

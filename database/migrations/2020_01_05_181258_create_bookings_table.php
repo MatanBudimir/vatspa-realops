@@ -15,6 +15,15 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->string('unique_id');
+            $table->string('callsign');
+            $table->string('aircraft');
+            $table->string('etd');
+            $table->string('eta');
+            $table->string('date')->nullable();
+            $table->longtext('route')->nullable();
+            $table->boolean('booked')->default(false);
             $table->timestamps();
         });
     }

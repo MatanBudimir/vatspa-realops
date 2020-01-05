@@ -40,6 +40,8 @@
           <li class="nav-item">
             <a class="nav-link {{ Request::is('bookings*') ? 'active' : '' }}" href="{{ route('bookking.index') }}">Bookings</a>
           </li>
+          @auth
+          @admin
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Request::is('admin*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Admin
@@ -50,11 +52,15 @@
                 <a class="dropdown-item" href="{{ route('admin.event') }}">Edit Event</a>
             </div>
           </li>
-          @auth
-          @admin
           @endadmin
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{ Request::is('profile') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ Auth::user()->fname }} {{ Auth::user()->lname }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ url('/profile') }}">Profile</a>
+                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+            </div>
           </li>
           @else
           <li class="nav-item">
@@ -73,7 +79,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; <a style="color: white; text-decoration: none;" href="https://vatspa.es" target="_blank">VATSPA</a> {{ date('Y') }}</p>
+      <p class="m-0 text-center text-white">Copyright &copy; {{ date('Y') }} 2020 <a href="https://vatspa.es" target="_blank" style="color: white;">VatSpa - vACC España - Spain</a>. Todos los derechos reservados</p>
     </div>
     <!-- /.container -->
   </footer>
