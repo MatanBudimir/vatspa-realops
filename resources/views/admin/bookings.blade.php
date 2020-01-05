@@ -3,7 +3,7 @@
 @section('title', 'Bookings')
 
 @section('content')
-<section id="about" style="width: 50%; margin-left: auto; margin-right: auto;">
+<section id="about" style="width: 75%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: center;">All Bookings</h2>
 
 <table id="usersTable" class="table" style="width:100%; word-break: break-all; text-align: center;">

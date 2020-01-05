@@ -3,7 +3,7 @@
 @section('title', 'Users')
 
 @section('content')
-<section id="about" style="width: 50%; margin-left: auto; margin-right: auto;">
+<section id="about" style="width: 75%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: center;">All users</h2>
 <table id="usersTable" class="table" style="width:100%; word-break: break-all; text-align: center;">
     <thead>
@@ -22,7 +22,15 @@
             <td>{{ $user->id }}</td>
             <td>{{ $user->full() }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->bookings->count() }}</td>
+            <td>
+                @if (App\Models\Booking::where('user_id', $user->id)->count() <= 0)
+                    {{ App\Models\Booking::where('user_id', $user->id)->count() }}
+                @else
+                    <p>
+                        {{ App\Models\Booking::where('user_id', $user->id)->count() }}
+                    </p>
+                @endif
+            </td>
             <td>
                 <form method="POST" action="{{ route('admin.user.edit') }}">
                     @csrf
