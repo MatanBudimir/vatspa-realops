@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('event', 'AdminController@eventInfo')->name('admin.event');
 
+    Route::post('edit', 'AdminController@editUser')->name('admin.user.edit');
+
 });
 
 

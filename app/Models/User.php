@@ -24,4 +24,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function full() {
+        return $this->fname . ' ' . $this->lname;
+    }
+
+    public function bookings() {
+        return $this->hasMany('App\Models\Booking', 'id', 'user_id');
+    }
+
 }
