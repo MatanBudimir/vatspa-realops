@@ -33,6 +33,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
 
 //VATSIM SSO Routing
-Route::get('/login', 'LoginController@login')->middleware('guest')->name('login');
-Route::get('/validate', 'LoginController@validateLogin')->middleware('guest')->name('sso.validate');
-Route::get('/logout', 'LoginController@logout')->middleware('auth')->name('logout');
+Route::get('/login', 'Auth\LoginController@login')->middleware('guest')->name('login');
+Route::get('/validate', 'Auth\LoginController@validateLogin')->middleware('guest')->name('sso.validate');
+Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth')->name('logout');
