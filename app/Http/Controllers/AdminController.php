@@ -26,4 +26,16 @@ class AdminController extends Controller
 
         return view('admin.eventInfo')->withEvent($event);
     }
+
+    protected function editUser(Request $request) {
+        if (User::where('id', $request->cid)->first()->access_level == $request->role) {
+            return redirect()->back()->withError('User is already member of this role');
+        }
+
+        User::where('id', $request->cid)->update([
+            'access_level' => $request->role,
+        ]);
+
+        return redirect()->back()->withSuccess('User successfully edited!');
+    }
 }
