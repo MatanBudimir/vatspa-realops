@@ -42,7 +42,7 @@
                 Bookings
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @auth
+            @auth
               @if (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() < App\Models\EventInfo::first()->allowed_bookings)
               <a class="dropdown-item {{ Request::is('bookings/departures') ? 'active' : '' }}" href="{{ route('bookings.dep') }}">Departures</a>
               <a class="dropdown-item {{ Request::is('bookings/arrivals') ? 'active' : '' }}" href="{{ route('bookings.arr') }}">Arrivals</a>

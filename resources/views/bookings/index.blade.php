@@ -18,8 +18,11 @@
             <th>Aircraft</th>
             <th>DEP ICAO</th>
             <th>ARR ICAO</th>
+            @if (Request::is('bookings/departures'))
             <th>ETD</th>
+            @else
             <th>ETA</th>
+            @endif
             <th>Book</th>
         </tr>
     </thead>
@@ -30,8 +33,11 @@
             <td>{{ $slot->aircraft }}</td>
             <td>{{ $slot->dep_icao }}</td>
             <td>{{ $slot->arr_icao }}</td>
-            <td>{{ $slot->etd }}</td>
-            <td>{{ $slot->eta }}</td>
+            @if (Request::is('bookings/departures'))
+            <td>{{ substr($slot->etd, 11, 16) }}</td>
+            @else
+            <td>{{ substr($slot->eta, 11, 16) }}</td>
+            @endif
             <td>
                 @if ($slot->booked || App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() >= App\Models\EventInfo::first()->allowed_bookings)
                     <button class="btn btn-danger">Booked</button>
