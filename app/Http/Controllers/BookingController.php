@@ -78,19 +78,85 @@ class BookingController extends Controller
             return redirect()->back()->withError('Bookings are closed!');
         }
 
-        if (strlen($request->aircraft) < 3 || strlen($request->aircraft) > 4) {
+        if (strlen($request->aircraft) < 4 || strlen($request->aircraft) > 4) {
             return redirect()->back()->withError('Please enter valid aircraft type!');
         }
 
 
 
         Booking::where('unique_id', $request->uid)->where('booked', false)->update([
-            'aircraft' => $request->aircraft,
+            'aircraft' => strtoupper($request->aircraft),
             'user_id' => Auth::user()->id,
             'booked' => true,
         ]);
 
         return redirect()->route('profile')->withSuccess('Slot Successfully booked!');
+    }
+
+    public function booking($uid) {
+        if (! Booking::where('unique_id', $uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        if (Booking::where('unique_id', $uid)->first()->user_id != Auth::user()->id) {
+            return redirect()->back()->withError('This is not your slot!');
+        }
+
+        if (! Booking::where('user_id', Auth::user()->id)->where('unique_id', $uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        $slot = Booking::where('unique_id', $uid)->where('user_id', Auth::user()->id)->where('booked', true)->firstOrFail();
+
+        return view('bookings.slot')->withSlot($slot);
+
+    }
+
+    public function edit(Request $request) {
+        if (! Booking::where('unique_id', $request->uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        if (! Booking::where('user_id', Auth::user()->id)->where('unique_id', $request->uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        if (Booking::where('unique_id', $request->uid)->first()->user_id != Auth::user()->id) {
+            return redirect()->back()->withError('This is not your slot!');
+        }
+
+        if (strlen($request->aircraft) < 4 || strlen($request->aircraft) > 4) {
+            return redirect()->back()->withError('Please enter valid aircraft type!');
+        }
+
+        Booking::where('user_id', Auth::user()->id)->where('booked', true)->where('unique_id', $request->uid)->update([
+            'aircraft' => $request->aircraft,
+        ]);
+
+        return redirect()->back()->withSuccess('Slot successfully edited!');
+    }
+
+    public function delete(Request $request) {
+        if (! Booking::where('unique_id', $request->uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        if (! Booking::where('user_id', Auth::user()->id)->where('unique_id', $request->uid)->exists()) {
+            return redirect()->back()->withError('Slot does not exist!');
+        }
+
+        if (Booking::where('unique_id', $request->uid)->first()->user_id != Auth::user()->id) {
+            return redirect()->back()->withError('This is not your slot!');
+        }
+
+
+        Booking::where('user_id', Auth::user()->id)->where('booked', true)->where('unique_id', $request->uid)->update([
+            'aircraft' => null,
+            'user_id' => null,
+            'booked' => false,
+        ]);
+
+        return redirect()->route('profile')->withSuccess('Slot successfully deleted!');
     }
 
 }

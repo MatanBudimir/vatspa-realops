@@ -27,6 +27,7 @@
             <th>ARR ICAO</th>
             <th>ETD</th>
             <th>ETA</th>
+            <th>View</th>
         </tr>
     </thead>
     <tbody>
@@ -36,8 +37,21 @@
             <td>{{ $booking->aircraft }}</td>
             <td>{{ $booking->dep_icao }}</td>
             <td>{{ $booking->arr_icao }}</td>
-            <td>{{ $booking->etd }}</td>
-            <td>{{ $booking->eta }}</td>
+            <td>
+                @if ($booking->etd == null || $booking->etd == '')
+                -
+                @else
+                {{ substr($booking->etd, 11, 16) }}
+                @endif
+            </td>
+            <td>
+                @if ($booking->eta == null || $booking->eta == '')
+                -
+                @else
+                {{ substr($booking->eta, 11, 16) }}
+                @endif
+            </td>
+            <td><a href="{{ route('user.booking', $booking->unique_id) }}"><button class="btn btn-primary">View Details</button></a></td>
         </tr>
         @endforeach
     </tbody>

@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('booking/{id}', 'BookingController@booking')->name('user.booking');
 
+    Route::post('booking/edit', 'BookingController@edit')->name('user.edit.slot');
+
+    Route::post('booking/delete', 'BookingController@delete')->name('user.delete.slot');
+
     Route::get('profile', 'PagesController@profile')->name('profile');
 
 });
