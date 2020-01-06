@@ -42,11 +42,20 @@
                 Bookings
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @auth
+              @if (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() < App\Models\EventInfo::first()->allowed_bookings)
               <a class="dropdown-item {{ Request::is('bookings/departures') ? 'active' : '' }}" href="{{ route('bookings.dep') }}">Departures</a>
               <a class="dropdown-item {{ Request::is('bookings/arrivals') ? 'active' : '' }}" href="{{ route('bookings.arr') }}">Arrivals</a>
+              @endif
+              @else
+              <a class="dropdown-item {{ Request::is('bookings/departures') ? 'active' : '' }}" href="{{ route('bookings.dep') }}">Departures</a>
+              <a class="dropdown-item {{ Request::is('bookings/arrivals') ? 'active' : '' }}" href="{{ route('bookings.arr') }}">Arrivals</a>
+              @endauth
               @auth
               @hasBooking
+              @if (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() < App\Models\EventInfo::first()->allowed_bookings)
               <div class="dropdown-divider"></div>
+              @endif
               @foreach (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->get() as $booking)
               <a class="dropdown-item {{ Request::is('booking') ? 'active' : '' }}" href="{{ route('user.booking', $booking->unique_id) }}">{{ $booking->callsign }}</a>
               @endforeach
@@ -93,7 +102,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; {{ date('Y') }} 2020 <a href="https://vatspa.es" target="_blank" style="color: white;">VatSpa - vACC España - Spain</a>. Todos los derechos reservados</p>
+      <p class="m-0 text-center text-white">Copyright &copy; {{ date('Y') }} <a href="https://vatspa.es" target="_blank" style="color: white;">VatSpa - vACC España - Spain</a>. Todos los derechos reservados</p>
     </div>
     <!-- /.container -->
   </footer>

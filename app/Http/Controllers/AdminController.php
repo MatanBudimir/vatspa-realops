@@ -85,7 +85,6 @@ class AdminController extends Controller
                 'callsign' => $line['callsign'],
                 'aircraft' => $line['aircraft'],
                 'etd' => $line['etd'],
-                'eta' => $line['eta'],
                 'date' => $line['date'],
                 'route' => $line['route'],
                 'booked' => false,

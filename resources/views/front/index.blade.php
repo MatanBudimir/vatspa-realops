@@ -4,7 +4,7 @@
 
 @section('content')
 
-<header class="text-white" style="background-image: url('{{ $event->background_image }}');">
+<header class="text-white" style="background-image: url('{{ $event->background_image }}'); background-size: 100%;">
     <div class="container text-center">
       <h1>{{ $event->title_text }}</h1>
       <p class="lead">{{ $event->below_title_text }}</p>
