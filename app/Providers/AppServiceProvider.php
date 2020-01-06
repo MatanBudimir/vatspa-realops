@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Blade;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::if('admin', function() {
             return auth()->user()->access_level == 1;
+        });
+
+        Blade::if('hasBooking', function() {
+            return Booking::where('user_id', Auth::user()->id)->where('booked', true)->exists();
         });
     }
 }

@@ -37,8 +37,22 @@
           <li class="nav-item">
             <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {{ Request::is('bookings*') ? 'active' : '' }}" href="{{ route('bookking.index') }}">Bookings</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{ Request::is('bookings*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bookings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Departures</a>
+              <a class="dropdown-item" href="#">Arrivals</a>
+              @auth
+              @hasBooking
+              <div class="dropdown-divider"></div>
+              @foreach (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->get() as $item)
+              <a class="dropdown-item" href="#">{{ $item->callsign }}</a>
+              @endforeach
+              @endhasBooking
+              @endauth
+            </div>
           </li>
           @auth
           @admin
@@ -47,9 +61,9 @@
               Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('admin.users') }}">Users</a>
-                <a class="dropdown-item" href="{{ route('admin.bookings') }}">Bookings</a>
-                <a class="dropdown-item" href="{{ route('admin.event') }}">Edit Event</a>
+                <a class="dropdown-item {{ Request::is('admin/users') ? 'active' : '' }}" href="{{ route('admin.users') }}">Users</a>
+                <a class="dropdown-item {{ Request::is('admin/bookings') ? 'active' : '' }}" href="{{ route('admin.bookings') }}">Bookings</a>
+                <a class="dropdown-item {{ Request::is('admin/event') ? 'active' : '' }}" href="{{ route('admin.event') }}">Edit Event</a>
             </div>
           </li>
           @endadmin
@@ -58,7 +72,7 @@
               {{ Auth::user()->fname }} {{ Auth::user()->lname }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ url('/profile') }}">Profile</a>
+                <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{ route('profile') }}">Profile</a>
                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
             </div>
           </li>
@@ -87,9 +101,30 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{ url('/') }}/vendor/jquery/jquery.min.js"></script>
   <script src="{{ url('/') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <!-- Plugin JavaScript -->
   <script src="{{ url('/') }}/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+  @if (session()->has("success"))
+            <script lang="javascript">
+                Swal.fire(
+                    'Success!',
+                    "{{ session('success') }}",
+                    'success'
+                )
+            </script>
+        @endif
+
+        @if (session()->has("error"))
+            <script lang="javascript">
+                Swal.fire(
+                    'Error!',
+                    "{{ session('error') }}",
+                    'error'
+                )
+            </script>
+        @endif
 
   @yield('scripts')
 

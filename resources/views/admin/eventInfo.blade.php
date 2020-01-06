@@ -33,6 +33,7 @@
     <input class="form-control" name="end" value="{{ $event->end_time }}">
     <h5>Event Text</h5>
     <textarea id="event_text" name="ev_text">{{ $event->event_text }}</textarea>
+    <p></p>
     <button class="btn btn-success">Edit</button>
     </form>
 </section>
