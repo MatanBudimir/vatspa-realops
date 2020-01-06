@@ -78,29 +78,17 @@ class BookingController extends Controller
             return redirect()->back()->withError('Bookings are closed!');
         }
 
-        $slot = Booking::where('unique_id', $request->uid)->where('booked', false)->first();
-
-        if ($slot->callsign == null || $slot->callsign == '') {
-            if (Booking::where('callsign', $request->cs)->exists()) {
-                return redirect()->back()->withError('Callsign already in use!');
-            }
-            if (strlen($request->cs) < 4 || strlen($request->cs) > 7) {
-                return redirect()->back()->withError('Please enter valid callsign!');
-            }
-            $slot->callsign = $request->cs;
+        if (strlen($request->aircraft) < 3 || strlen($request->aircraft) > 4) {
+            return redirect()->back()->withError('Please enter valid aircraft type!');
         }
 
-        if ($slot->aircraft == null || $slot->aircraft == '') {
-            if (strlen($request->aircraft) < 3 || strlen($request->aircraft) > 4) {
-                return redirect()->back()->withError('Please enter valid aircraft type!');
-            }
-            $slot->aircraft = $request->aircraft;
-        }
 
-        $slot->user_id = Auth::user()->id;
-        $slot->booked = true;
 
-        $slot->save();
+        Booking::where('unique_id', $request->uid)->where('booked', false)->update([
+            'aircraft' => $request->aircraft,
+            'user_id' => Auth::user()->id,
+            'booked' => true,
+        ]);
 
         return redirect()->route('profile')->withSuccess('Slot Successfully booked!');
     }

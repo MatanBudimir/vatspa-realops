@@ -28,11 +28,7 @@
 
                         <tbody><tr><td><b>Callsign </b><font size="2">(e.g. DLH123)</font></td>
                             <td>
-                                @if ($slot->callsign == '' || $slot->callsign == null)
-                                <input maxlength="7" class="form-control" minlength="4" type="text" name="cs">
-                                @else
                                 {{ $slot->callsign }}
-                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -57,11 +53,7 @@
                         @endif
                         <tr><td><b>Aircraft </b><font size="2">(e.g. A320, B738, A332, ...)</font></td>
                             <td>
-                                @if ($slot->aircraft == null || $slot->aircraft == '')
                                 <input class="form-control" maxlength="4" name="aircraft">
-                                @else
-                                {{ $slot->aircraft }}
-                                @endif
                             </td>
                         </tr>
                     </tbody></table>

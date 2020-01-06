@@ -15,7 +15,6 @@
     <thead>
         <tr>
             <th>Callsign</th>
-            <th>Aircraft</th>
             <th>DEP ICAO</th>
             <th>ARR ICAO</th>
             @if (Request::is('bookings/departures'))
@@ -30,7 +29,6 @@
         @foreach ($slots as $slot)
         <tr>
             <td>{{ $slot->callsign }}</td>
-            <td>{{ $slot->aircraft }}</td>
             <td>{{ $slot->dep_icao }}</td>
             <td>{{ $slot->arr_icao }}</td>
             @if (Request::is('bookings/departures'))
@@ -39,8 +37,10 @@
             <td>{{ substr($slot->eta, 11, 16) }}</td>
             @endif
             <td>
-                @if ($slot->booked || App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() >= App\Models\EventInfo::first()->allowed_bookings)
-                    <button class="btn btn-danger">Booked</button>
+                @if ($slot->user_id == Auth::user()->id)
+                <a href="{{ route('user.booking', $slot->unique_id) }}"><button class="btn btn-primary">View Details</button></a>
+                @elseif ($slot->booked)
+                <button class="btn btn-danger">Booked</button>
                 @else
                 <a href="{{ route('user.start.booking', $slot->unique_id) }}"><button class="btn btn-success">Book</button></a>
                 @endif
