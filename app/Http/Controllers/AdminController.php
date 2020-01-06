@@ -94,5 +94,7 @@ class AdminController extends Controller
                 'type' => $line['type'],
             ]);
         });
+
+        return redirect()->back()->withSuccess('Flights Successfully imported!');
     }
 }

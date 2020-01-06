@@ -6,9 +6,9 @@
 <section id="about" style="width: 75%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: center;">All Bookings</h2>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+<center><button type="button" style="margin-bottom: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
     Import Flights
-  </button>
+  </button></center>
 <table id="usersTable" class="table" style="width:100%; word-break: break-all; text-align: center;">
     <thead>
         <tr>
