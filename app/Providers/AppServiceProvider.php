@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Blade;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EventInfo;
 
 class AppServiceProvider extends ServiceProvider
 {

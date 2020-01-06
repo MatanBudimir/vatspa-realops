@@ -62,9 +62,9 @@ class LoginController extends Controller
             $user = User::find($user->id);
             Auth::login($user, true);
         });
-        return redirect('/')->with('success', 'Logged in!');
+        return redirect()->intended(route('home'));
     }
-    
+
     /**
      * Log the user out.
      *

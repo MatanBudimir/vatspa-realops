@@ -33,7 +33,7 @@
             <td>{{ $slot->etd }}</td>
             <td>{{ $slot->eta }}</td>
             <td>
-                @if ($slot->booked)
+                @if ($slot->booked || App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->count() >= App\Models\EventInfo::first()->allowed_bookings)
                     <button class="btn btn-danger">Booked</button>
                 @else
                 <a href="{{ route('user.start.booking', $slot->unique_id) }}"><button class="btn btn-success">Book</button></a>
