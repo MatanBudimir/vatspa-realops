@@ -16,6 +16,7 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>{{ $event->event_name }} - {{ $event->event_date }}</h2>
+          <img src="{{ $event->banner_link }}" style="min-width: 10%; max-width: 100%;">
           <p class="lead">{!! html_entity_decode($event->event_text) !!}</p>
         </div>
       </div>

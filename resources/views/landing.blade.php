@@ -38,17 +38,17 @@
             <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{ Request::is('bookings*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {{ Request::is('bookings*', 'booking*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Bookings
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Departures</a>
-              <a class="dropdown-item" href="#">Arrivals</a>
+              <a class="dropdown-item {{ Request::is('bookings/departures') ? 'active' : '' }}" href="{{ route('bookings.dep') }}">Departures</a>
+              <a class="dropdown-item {{ Request::is('bookings/arrivals') ? 'active' : '' }}" href="{{ route('bookings.arr') }}">Arrivals</a>
               @auth
               @hasBooking
               <div class="dropdown-divider"></div>
-              @foreach (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->get() as $item)
-              <a class="dropdown-item" href="#">{{ $item->callsign }}</a>
+              @foreach (App\Models\Booking::where('user_id', Auth::user()->id)->where('booked', true)->get() as $booking)
+              <a class="dropdown-item {{ Request::is('booking') ? 'active' : '' }}" href="{{ route('user.booking', $booking->unique_id) }}">{{ $booking->callsign }}</a>
               @endforeach
               @endhasBooking
               @endauth

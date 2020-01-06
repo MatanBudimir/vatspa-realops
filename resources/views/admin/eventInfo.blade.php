@@ -1,6 +1,6 @@
 @extends('landing')
 
-@section('title', 'Bookings')
+@section('title', 'Event Information')
 
 @section('content')
 <section id="about" style="width: 50%; margin-left: auto; margin-right: auto;">

@@ -15,11 +15,25 @@ Route::get('/', 'PagesController@home')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
+
+
     Route::group(['prefix' => 'bookings'], function () {
 
-        Route::get('/', 'BookingController@index')->name('bookking.index');
+        Route::get('departures', 'BookingController@departures')->name('bookings.dep');
+
+        Route::get('arrivals', 'BookingController@arrivals')->name('bookings.arr');
 
     });
+
+    Route::group(['prefix' => 'book'], function () {
+
+        Route::get('{id}', 'BookingController@viewSlot')->name('user.start.booking');
+
+        Route::post('/', 'BookingController@book')->name('user.book.slot');
+
+    });
+
+    Route::get('booking/{id}', 'BookingController@booking')->name('user.booking');
 
     Route::get('profile', 'PagesController@profile')->name('profile');
 
