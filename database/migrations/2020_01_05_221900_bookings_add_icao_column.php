@@ -14,8 +14,8 @@ class BookingsAddIcaoColumn extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('dep_icao')->after('etd');
-            $table->string('arr_icao')->after('eta');
+            $table->string('dep_icao')->after('etd')->nullable();
+            $table->string('arr_icao')->after('eta')->nullable();
         });
     }
 

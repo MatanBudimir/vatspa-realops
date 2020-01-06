@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\EventInfo;
+use Illuminate\Support\Str;
+use Rap2hpoutre\FastExcel\FastExcel;
+use DB;
 
 class AdminController extends Controller
 {
@@ -70,5 +73,26 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back()->withSuccess('Event Edited!');
+    }
+
+    protected function importFlight(Request $request) {
+        Booking::truncate();
+        $path = $request->file('xlsx')->storeAs('files', 'flights.xlsx');
+        $bookings = (new FastExcel)->import(storage_path('app/files/flights.xlsx'), function ($line) {
+            return Booking::create([
+                'user_id' => null,
+                'unique_id' => Str::random(10) . '-' . Str::random(10),
+                'callsign' => $line['callsign'],
+                'aircraft' => $line['aircraft'],
+                'etd' => $line['etd'],
+                'eta' => $line['eta'],
+                'date' => $line['date'],
+                'route' => $line['route'],
+                'booked' => false,
+                'dep_icao' => $line['dep'],
+                'arr_icao' => $line['arr'],
+                'type' => $line['type'],
+            ]);
+        });
     }
 }

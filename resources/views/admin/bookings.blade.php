@@ -5,7 +5,10 @@
 @section('content')
 <section id="about" style="width: 75%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: center;">All Bookings</h2>
-
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+    Import Flights
+  </button>
 <table id="usersTable" class="table" style="width:100%; word-break: break-all; text-align: center;">
     <thead>
         <tr>
@@ -45,4 +48,29 @@ $(document).ready( function () {
     $('#usersTable').DataTable();
 } );
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import Flights</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ route('admin.import.flights') }}" enctype="multipart/form-data">
+                @csrf
+          <input class="form-control" type="file" name="xlsx">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="btn btn-success">Import Flights</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
