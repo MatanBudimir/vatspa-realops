@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EventInfo;
 use Illuminate\Support\Carbon;
+use Mail;
+use App\Mail\BookingConfirmed;
+use App\Mail\BookingDeleted;
+use App\Models\User;
 
 class BookingController extends Controller
 {
@@ -90,6 +94,10 @@ class BookingController extends Controller
             'booked' => true,
         ]);
 
+        $user = User::where('id', Auth::user()->id)->first();
+        $booking = Booking::where('unique_id', $request->uid)->where('booked', true)->where('user_id', Auth::user()->id)->first();
+        Mail::to(Auth::user()->email)->send(new BookingConfirmed($user, $booking));
+
         return redirect()->route('profile')->withSuccess('Slot Successfully booked!');
     }
 
@@ -155,6 +163,10 @@ class BookingController extends Controller
             'user_id' => null,
             'booked' => false,
         ]);
+
+        $user = User::where('id', Auth::user()->id)->first();
+        $booking = Booking::where('unique_id', $request->uid)->where('booked', false)->first();
+        Mail::to(Auth::user()->email)->send(new BookingDeleted($user, $booking));
 
         return redirect()->route('profile')->withSuccess('Slot successfully deleted!');
     }
