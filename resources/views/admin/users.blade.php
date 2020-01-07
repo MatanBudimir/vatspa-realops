@@ -1,5 +1,10 @@
 @extends('landing')
 
+@section('style')
+    <!-- Custom styles for this template -->
+    <link href="{{ url('/') }}/css/scrolling-nav.css" rel="stylesheet">
+@endsection
+
 @section('title', 'Users')
 
 @section('content')

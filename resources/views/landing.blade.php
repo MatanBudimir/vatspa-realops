@@ -13,9 +13,6 @@
   <!-- Bootstrap core CSS -->
   <link href="{{ url('/') }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="{{ url('/') }}/css/scrolling-nav.css" rel="stylesheet">
-
   <!-- VATSPA Favicon -->
   <link rel="shortcut icon" href="https://vatspa.es/favicon.ico">
 
