@@ -20,8 +20,8 @@
             <th>Callsign</th>
             <th>Pilot ID</th>
             <th>Aircraft</th>
-            <th>ETD</th>
-            <th>ETA</th>
+            <th>STD</th>
+            <th>STA</th>
         </tr>
     </thead>
     <tbody>

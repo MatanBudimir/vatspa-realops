@@ -38,13 +38,13 @@
                         </tr>
                         @if ($slot->etd != null || $slot->etd != '')
                         <tr>
-                            <td><b>Estimated Time of Depature </b><font size="2">(ETD)</font></td>
+                            <td><b>Standard Time of Depature </b><font size="2">(STD)</font></td>
                             <td>{{ substr($slot->etd, 11, 16) }}</td>
                         </tr>
                         @endif
                         @if ($slot->eta != null || $slot->eta != '')
                         <tr>
-                            <td><b>Estimated Time of Arrival </b><font size="2">(ETA)</font></td>
+                            <td><b>Standard Time of Arrival </b><font size="2">(STA)</font></td>
                             <td>{{ substr($slot->eta, 11, 16) }}</td>
                         </tr>
                         @endif

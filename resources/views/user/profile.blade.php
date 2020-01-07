@@ -30,8 +30,8 @@
             <th>Aircraft</th>
             <th>DEP ICAO</th>
             <th>ARR ICAO</th>
-            <th>ETD</th>
-            <th>ETA</th>
+            <th>STD</th>
+            <th>STA</th>
             <th>View</th>
         </tr>
     </thead>

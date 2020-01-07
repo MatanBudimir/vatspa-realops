@@ -23,9 +23,9 @@
             <th>DEP ICAO</th>
             <th>ARR ICAO</th>
             @if (Request::is('bookings/departures'))
-            <th>ETD</th>
+            <th>STD</th>
             @else
-            <th>ETA</th>
+            <th>STA</th>
             @endif
             <th>Book</th>
         </tr>
