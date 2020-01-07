@@ -8,6 +8,9 @@
     background: url('{{ EventInfo::first()->background_image }}') no-repeat 0 0;
     background-size: cover;
   }
+  .text {
+      color: white !important;
+  }
   </style>
 
 <!-- Custom styles for this template -->
@@ -31,7 +34,7 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <img src="{{ $event->banner_link }}" style="min-width: 10%; max-width: 100%;">
-          <p style="color: white;">{!! html_entity_decode($event->event_text) !!}</p>
+          <p class="text">{!! html_entity_decode($event->event_text) !!}</p>
         </div>
       </div>
     </div>
