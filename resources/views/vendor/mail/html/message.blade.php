@@ -1,7 +1,7 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://realops.matanbudimir.de'])
+        @component('mail::header', ['url' => 'https://realops.vatspa.es'])
             {{ 'VATSPA' }}
         @endcomponent
     @endslot
