@@ -84,6 +84,7 @@ class AdminController extends Controller
                 'unique_id' => Str::random(10) . '-' . Str::random(10),
                 'callsign' => $line['callsign'],
                 'aircraft' => null,
+                'eta' => $line['eta'],
                 'etd' => $line['etd'],
                 'date' => $line['date'],
                 'route' => null,
